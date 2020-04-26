@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>details </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card >
+    <ion-card-header>
+      <ion-card-title>{{product.name}} <span style="float: right;color: coral;">{{ product.etat }}</span>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p align="justify">{{product.description}}</p> 
+   
+      <p style="color: black;">{{product.adresse}}</p>
+      <p style="color: black;">{{product.tel}}</p>
+      <br>  
+    </ion-card-content>
+
+  </ion-card>
+</ion-content>
+

@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Add Product</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="product.name" placeholder="Name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-textarea rows="3" [(ngModel)]="product.description" placeholder="Description"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="product.picture" placeholder="Picture"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="number" [(ngModel)]="product.price" placeholder="Price"></ion-input>
+    </ion-item>
+    <ion-list>
+      <ion-radio-group class="ion-margin-top" [(ngModel)]="product.etat">
+        <ion-list-header>
+          <ion-label>Etat</ion-label>
+        </ion-list-header>
+    
+        <ion-item>
+          <ion-label>En stoke</ion-label>
+          <ion-radio slot="start" name="product.etat" value="en Stocke"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Non disponible</ion-label>
+          <ion-radio slot="start" name="product.etat" value="Non disponible"></ion-radio>
+        </ion-item>
+    
+      </ion-radio-group>
+    </ion-list>
+    <ion-item>
+      <ion-input type="number" [(ngModel)]="product.tel" placeholder="phone number"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="product.adresse" placeholder="adresse"></ion-input>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button (click)="saveProduct()" expand="block">
+      Save product
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

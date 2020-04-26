@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Registre</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-item class="ion-margin-top" >
+    <ion-label position="floating">E-mail</ion-label>
+
+    <ion-input type="email" [(ngModel)]="userRegister.email"></ion-input>
+  </ion-item>
+
+  <ion-item class="ion-margin-top" >
+    <ion-label position="floating">Password</ion-label>
+
+    <ion-input type="password" [(ngModel)]="userRegister.password"></ion-input>
+  </ion-item>
+  
+  <ion-item class="ion-margin-top">
+    <ion-label position="floating">userName</ion-label>
+    <ion-input type="name"  [(ngModel)]="userRegister.userName"></ion-input>
+  </ion-item>
+  <ion-item class="ion-margin-top" >
+    <ion-label position="floating">Adress</ion-label>
+    <ion-input type="text" [(ngModel)]="userRegister.adresse"></ion-input>
+  </ion-item>
+
+  <ion-item class="ion-margin-top">
+    <ion-label position="floating">phone Number</ion-label>
+    <ion-input type="number" [(ngModel)]="userRegister.tel"></ion-input>
+  </ion-item>
+<br>
+<ion-button expand="full" color="danger" (click)="register()">register</ion-button>
+
+<ion-text  color="dark" (click)="goToLogin()"><p text-center>Already have a account?</p> </ion-text>
+</ion-content>
