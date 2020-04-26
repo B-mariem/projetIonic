@@ -5,4 +5,5 @@ export interface User {
     userName?:string
     adresse?:string
     tel?:number   
+    type?:string
 }
