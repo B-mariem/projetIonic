@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
+import { CartModalPageModule } from './pages/cart/cart-modal/cart-modal.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,8 +24,10 @@ import { Keyboard } from '@ionic-native/keyboard/ngx';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    CartModalPageModule
   ],
+
   providers: [
     StatusBar,
     SplashScreen,

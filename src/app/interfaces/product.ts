@@ -3,10 +3,12 @@ export interface Product {
     name?: string;
     description?: string;
     picture?: string;
-    price?: string;
+    price?: number;
     createdAt?: Date;
     userId?: string;
     etat?:string,
     adresse?:string,
     tel?:string,
+    amount?:number,
+    totalamount?:number
 }

@@ -1,8 +1,14 @@
 <ion-header>
   <ion-toolbar color="primary">
-     <ion-button slot="end" fill="clear" (click)="presentActionSheet()">
-       <ion-icon style="color:#fff" name="menu"></ion-icon>
-     </ion-button>
+
+     <ion-buttons slot="end" fill="clear">
+      <ion-button (click)="openCart()" #cart class="btn_cart">
+      <div class="cart-length">{{ cartItemCount | async }}</div>
+      <ion-icon name="cart" class="cart-icon"></ion-icon>
+      </ion-button>
+       <ion-icon style="color:#fff" name="menu" (click)="presentActionSheet()"></ion-icon>
+     </ion-buttons>
+
      <ion-title>
        Covid-19
      </ion-title>
@@ -10,28 +16,40 @@
  </ion-header>
  
  <ion-content>
+
    <br>
  <ion-searchbar></ion-searchbar>
+
   <ion-list>
     <ion-label>All Products</ion-label>
     <ion-item-sliding *ngFor="let product of products">
-      <ion-item button [routerLink]="['/details', product.id]">
-        <ion-avatar slot="start">
+      <ion-item>
+        <ion-avatar slot="start" [routerLink]="['/details', product.id]">
           <img [src]="product.picture">
         </ion-avatar>
-
-        <ion-label>
+        <ion-label [routerLink]="['/details', product.id]">
           {{ product.name }}
           <p>{{ product.description }}</p>
           <p style="float: right;color: coral;">{{ product.etat }}</p>
           <p style="color: black;">{{product.adresse}}</p>
-        </ion-label>
-        <ion-note color="primary" slot="end" *ngIf="product.price">{{ product.price | currency: 'TND' }}</ion-note>
-      
+         
+        </ion-label>        
+        <ion-note color="primary" slot="end">
+          <p>{{ product.price | currency: 'TND' }}</p>
+          <ion-button (click)="addToCart(product)" >
+            <ion-icon name="add"></ion-icon>
+          </ion-button>
+         
+        </ion-note>
+        
+          
+        
       </ion-item>
 
      
     </ion-item-sliding>
+    
+    
   </ion-list>
 </ion-content>
 <ion-footer>

@@ -13,6 +13,7 @@ const routes: Routes = [
   { path: 'myproducts', loadChildren: './pages/myproducts/myproducts.module#MyproductsPageModule' },
   { path: 'edit-products/:id', loadChildren: './pages/edit-products/edit-products.module#EditProductsPageModule' },
   { path: 'add-products', loadChildren: './pages/add-products/add-products.module#AddProductsPageModule' },
+  { path: 'cart-modal', loadChildren: './pages/cart/cart-modal/cart-modal.module#CartModalPageModule' },
 ];
 
 @NgModule({

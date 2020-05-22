@@ -17,7 +17,7 @@ export class MyproductsPage implements OnInit {
   private loading: any;
   public products = new Array<Product>();
   public productsUser = new Array<Product>();
-  public user :User ={}
+  public user :User;
   private productsSubscription: Subscription;
   private userSubscription: Subscription;
 private userId:string

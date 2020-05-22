@@ -1,3 +1,20 @@
-ion-avatar {
-    --border-radius: 0;
-}
+
+.btn_cart {
+    height: 50px;
+    width: 50px;
+  }
+   
+  .cart-icon {
+    font-size: 30px;
+  }
+   
+  .cart-length {
+    color:var(--ion-color-primary);
+    position: absolute;
+    top: 12.5px;
+    left: 15px;
+    font-weight: 500;
+    font-size: 1em;
+    min-width: 25px;
+    z-index: 10;
+  }

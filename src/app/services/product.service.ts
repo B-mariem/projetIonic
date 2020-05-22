@@ -39,6 +39,9 @@ export class ProductService {
   updateProduct(id: string, product: Product) {
     return this.productsCollection.doc<Product>(id).update(product);
   }
+  updateAmount(id:string,amount:number){
+    return this.productsCollection.doc<Product>(id).update({ totalamount: amount});
+  }
 
   deleteProduct(id: string) {
     return this.productsCollection.doc(id).delete();
