@@ -12,7 +12,8 @@ const routes: Routes = [
   { path: 'registre', loadChildren: './pages/registre/registre.module#RegistrePageModule' },
   { path: 'myproducts', loadChildren: './pages/myproducts/myproducts.module#MyproductsPageModule' },
   { path: 'edit-products/:id', loadChildren: './pages/edit-products/edit-products.module#EditProductsPageModule' },
-  { path: 'add-products', loadChildren: './pages/add-products/add-products.module#AddProductsPageModule' },
+  { path: 'add-products', loadChildren: './pages/add-products/add-products.module#AddProductsPageModule' },  { path: 'cart-modal', loadChildren: './pages/cart-modal/cart-modal.module#CartModalPageModule' },
+
 ];
 
 @NgModule({
