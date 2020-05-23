@@ -3,6 +3,7 @@ import {BehaviorSubject} from'rxjs';
 import {Router} from '@angular/router';
 import { Commande } from 'src/app/interfaces/commande';
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +16,35 @@ private commandeCollection: AngularFirestoreCollection<Commande>
   constructor(private router:Router,private afs: AngularFirestore) {
     this.commandeCollection = this.afs.collection<Commande>('Commandes');
    }
+
+   // Commande
    addCommande(commande: Commande) {
     return this.commandeCollection.add(commande);
   }
+  getCommandes() {
+    return this.commandeCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+
+          return { id, ...data };
+        });
+      })
+    );
+  }
+  deleteCommande(id: string) {
+    return this.commandeCollection.doc(id).delete();
+  }
+  getCommande(id: string) {
+    return this.commandeCollection.doc<Commande>(id).valueChanges();
+  }
+
+
+
+
+
+
   getCart() {
     return this.cart;
   }

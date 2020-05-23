@@ -43,8 +43,6 @@ export class LoginPage implements OnInit {
 
     try {
       await  this.authService.login(this.userLogin.email, this.userLogin.password).then( res =>{
-       
-       this.router.navigate(['/myproducts']);
       })
     } catch (error) {
       this.presentToast(error.message);

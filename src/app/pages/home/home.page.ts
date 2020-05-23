@@ -15,13 +15,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
+
   private loading: any;
   public products = new Array<Product>();
-  public productsUser = new Array<Product>();
   public user :User ={}
   private productsSubscription: Subscription;
   cart = [];
   cartItemCount: BehaviorSubject<number>;
+  userId:string
   @ViewChild('cart', { read: ElementRef})fab: ElementRef;
 
   constructor(
@@ -35,20 +36,30 @@ export class HomePage implements OnInit {
       private router:Router) { }
 
   addToCart(product) {
+    let object={
+      id:product.id,
+      name:product.name,
+      picture:product.picture,
+      price:product.price,
+      totalamount:product.totalamount,
+      userId:product.userId
+    }
     this.cart = this.cartService.getCart();
-    if(product.totalamount>0){
+
+    if(object.totalamount>0){
       if(this.cart.length==0){
-        this.cartService.addToCart(product);
+        this.cartService.addToCart(object);
+        this.presentToast("product added")
       }else{
         for(let p of this.cart){
-            if(p.userId===product.userId){      
-              this.cartService.addToCart(product);
+            if(p.userId===object.userId){      
+              this.cartService.addToCart(object);
+              this.presentToast("product added")
+
               break;
           }else 
           alert("echec")
-        }
-          
-       
+        }      
       }
 
     }else{
@@ -63,16 +74,6 @@ export class HomePage implements OnInit {
  async openCart() {
     this.animateCSS('bounceOutLeft', true);
     this.router.navigate(["cart-modal"])
- 
-   /* let modal = await this.modalCtrl.create({
-      component: CartModalPage,
-      cssClass: 'cart-modal'
-    });
-    modal.onWillDismiss().then(() => {
-      this.fab.nativeElement.classList.remove('animated', 'bounceOutLeft')
-      this.animateCSS('bounceInLeft');
-    });
-    modal.present();*/
   }
  
   animateCSS(animationName, keepAnimated = false) {
@@ -91,10 +92,17 @@ export class HomePage implements OnInit {
 
 
   ngOnInit() { 
+    let allproducts;
+    this.userId = this.authService.getAuth().currentUser.uid;
+
     this.productsSubscription = this.productService.getProducts().subscribe(data => {
-      this.products = data;
-       
-    });
+      allproducts=data
+      for (var val in allproducts){
+        if(allproducts[val].userId!==this.userId){
+          this.products.push(allproducts[val])
+         }
+      }
+   });
     this.cart = this.cartService.getCart();
     this.cartItemCount = this.cartService.getCartItemCount();
     
@@ -126,7 +134,7 @@ export class HomePage implements OnInit {
 
 
   async presentToast(message: string) {
-    const toast = await this.toastCtrl.create({ message, duration: 2000 });
+    const toast = await this.toastCtrl.create({ message, duration: 1000 });
     toast.present();
   }
  
@@ -134,16 +142,29 @@ export class HomePage implements OnInit {
     const actionSheet = await this.actionSheetController.create({
       header: 'Option',
       buttons: [{
-        text: 'Déconnexion',
+        text: 'my orders',
+        role: 'destructive',
+        icon: 'cart',
+        handler: () => {
+              this.router.navigate(["list-order",this.userId])
+        },
+      },
+      {
+        text: 'logout',
         role: 'destructive',
         icon: 'log-out',
         handler: () => {
                this.logout()
 
         },
-      }]
+      }
+    ]
+      
     });
     await actionSheet.present();
   }
+
+
+  
 
 }

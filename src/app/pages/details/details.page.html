@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-back-button routerLink="/home" ></ion-back-button>
     </ion-buttons>
     <ion-title>details </ion-title>
   </ion-toolbar>
@@ -9,15 +9,24 @@
 
 <ion-content>
   <ion-card >
-    <ion-card-header>
-      <ion-card-title>{{product.name}} <span style="float: right;color: coral;">{{ product.etat }}</span>
-      </ion-card-title>
+    <ion-avatar slot="start" >
+      <img [src]="product.picture">
+    </ion-avatar> 
+    <ion-card-header>  
+      <ion-card-title>{{product.name}}  </ion-card-title> 
+      <ion-text  color="success" style="float: right;" *ngIf="product.totalamount > 0" >In Stock </ion-text>
+      <ion-text  color="danger"  style="float: right;" *ngIf="product.totalamount == 0" >not available </ion-text>
+
     </ion-card-header>
+
     <ion-card-content>
+      
       <p align="justify">{{product.description}}</p> 
-   
-      <p style="color: black;">Adresse :{{product.adresse}}</p>
-      <p style="color: black;">Phone number : {{product.tel}}</p>
+
+      <ion-text color="dark"><h3>Adresse :{{product.adresse}}</h3></ion-text>
+      <ion-text color="dark"><h3>Phone number : {{product.tel}}</h3></ion-text>
+      <ion-text color="warning" style="float: right;"><h3> {{product.totalamount}} pieces left</h3></ion-text>
+
       <br>  
     </ion-card-content>
 

@@ -25,24 +25,6 @@
     <ion-item>
       <ion-input type="number" [(ngModel)]="product.totalamount" placeholder="Amount"></ion-input>
     </ion-item>
-    <ion-list>
-      <ion-radio-group class="ion-margin-top" [(ngModel)]="product.etat">
-        <ion-list-header>
-          <ion-label>Etat</ion-label>
-        </ion-list-header>
-    
-        <ion-item>
-          <ion-label>En stoke</ion-label>
-          <ion-radio slot="start" name="product.etat" value="en Stocke"></ion-radio>
-        </ion-item>
-
-        <ion-item>
-          <ion-label>Non disponible</ion-label>
-          <ion-radio slot="start" name="product.etat" value="Non disponible"></ion-radio>
-        </ion-item>
-    
-      </ion-radio-group>
-    </ion-list>
     <ion-item>
       <ion-input type="number" [(ngModel)]="product.tel" placeholder="phone number"></ion-input>
     </ion-item>

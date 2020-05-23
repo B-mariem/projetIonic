@@ -6,7 +6,6 @@ export interface Product {
     price?: number;
     createdAt?: Date;
     userId?: string;
-    etat?:string,
     adresse?:string,
     tel?:string,
     amount?:number,

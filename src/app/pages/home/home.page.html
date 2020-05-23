@@ -30,8 +30,10 @@
         <ion-label [routerLink]="['/details', product.id]">
           {{ product.name }}
           <p>{{ product.description }}</p>
-          <p style="float: right;color: coral;">{{ product.etat }}</p>
-          <p style="color: black;">{{product.adresse}}</p>
+      <ion-text  color="success"  style="float: right; font-size: x-small;" *ngIf="product.totalamount > 0" >In Stock </ion-text>
+      <ion-text  color="danger"  style="float: right; font-size: x-small;" *ngIf="product.totalamount == 0" >not available </ion-text>
+ 
+      <p style="color: black;">{{product.adresse}}</p>
          
         </ion-label>        
         <ion-note color="primary" slot="end">

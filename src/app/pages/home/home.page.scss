@@ -1,20 +1,19 @@
-
 .btn_cart {
     height: 50px;
-    width: 50px;
+    width: 60px;
   }
    
   .cart-icon {
-    font-size: 30px;
+    font-size: 25px;
   }
    
   .cart-length {
-    color:var(--ion-color-primary);
+    color:#fff;
     position: absolute;
-    top: 12.5px;
-    left: 15px;
+    top: 8px;
+    left: 35px;
     font-weight: 500;
-    font-size: 1em;
+    font-size: 18px;
     min-width: 25px;
     z-index: 10;
   }

@@ -20,10 +20,7 @@ export class DetailsPage implements OnInit {
   constructor(
     private productService: ProductService,
     private activatedRoute: ActivatedRoute,
-    private navCtrl: NavController,
-    private loadingCtrl: LoadingController,
-    private authService: AuthService,
-    private toastCtrl: ToastController
+  
   ) {
     this.productId = this.activatedRoute.snapshot.params['id'];
 

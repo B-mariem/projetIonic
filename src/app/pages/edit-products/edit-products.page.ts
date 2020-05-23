@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/interfaces/product';
 import { Subscription } from 'rxjs';
 import { ProductService } from 'src/app/services/product.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NavController, LoadingController, ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -24,7 +24,8 @@ export class EditProductsPage implements OnInit {
     private navCtrl: NavController,
     private loadingCtrl: LoadingController,
     private authService: AuthService,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private router:Router,
   ) {
     this.productId = this.activatedRoute.snapshot.params['id'];
 
@@ -50,8 +51,8 @@ export class EditProductsPage implements OnInit {
       try {
         await this.productService.updateProduct(this.productId, this.product);
         await this.loading.dismiss();
+        this.router.navigate(["details",this.productId])
 
-        this.navCtrl.navigateBack('/home');
       } catch (error) {
         this.presentToast('Erro ao tentar salvar');
         this.loading.dismiss();

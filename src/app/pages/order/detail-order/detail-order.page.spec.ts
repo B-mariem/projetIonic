@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CartModalPage } from './cart-modal.page';
+import { DetailOrderPage } from './detail-order.page';
 
-describe('CartModalPage', () => {
-  let component: CartModalPage;
-  let fixture: ComponentFixture<CartModalPage>;
+describe('DetailOrderPage', () => {
+  let component: DetailOrderPage;
+  let fixture: ComponentFixture<DetailOrderPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CartModalPage ],
+      declarations: [ DetailOrderPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CartModalPage);
+    fixture = TestBed.createComponent(DetailOrderPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

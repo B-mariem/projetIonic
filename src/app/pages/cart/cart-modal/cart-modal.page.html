@@ -50,18 +50,14 @@
       </ion-item>
       <ion-list>
         <ion-radio-group class="ion-margin-top" [(ngModel)]="commande.type">
-          <ion-list-header>
-            <ion-label>delivery</ion-label>
-          </ion-list-header>
-      
           <ion-item>
-            <ion-label>Yes (5.000dt)</ion-label>
-            <ion-radio slot="start" name="commande.type" value="yes"></ion-radio>
+            <ion-label>delivery : 5.000 TND</ion-label>
+            <ion-radio slot="start" name="commande.type" value="delivery"></ion-radio>
           </ion-item>
   
           <ion-item>
-            <ion-label>Non</ion-label>
-            <ion-radio slot="start" name="commande.type" value="no"></ion-radio>
+            <ion-label>in store</ion-label>
+            <ion-radio slot="start" name="commande.type" value="in store"></ion-radio>
           </ion-item>
       
         </ion-radio-group>
@@ -81,14 +77,17 @@
           </ion-row>
         </ion-grid>
       </ion-item>
-      <ion-item>
+      <ion-list>
         <ion-item>
-          <ion-input type="text" [(ngModel)]="commande.adressClient" placeholder="adress Client"></ion-input>
+          <ion-input type="text" [(ngModel)]="commande.NameClient"  placeholder="Name Client"></ion-input>
         </ion-item>
         <ion-item>
           <ion-input type="phone" [(ngModel)]="commande.phoneClient" placeholder="phone Client"></ion-input>
         </ion-item>
-      </ion-item>
+        <ion-item  *ngIf="commande.type=='delivery'">
+          <ion-input type="text" [(ngModel)]="commande.adressClient"   placeholder="adress Client"></ion-input>
+        </ion-item>
+      </ion-list>
     </ion-list>
  
     <ion-button expand="full" (click)="checkout()">
