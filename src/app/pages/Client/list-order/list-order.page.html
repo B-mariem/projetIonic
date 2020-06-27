@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button routerLink="/home" ></ion-back-button>
+    </ion-buttons>
+    <ion-title>My Orders</ion-title>
+    <ion-buttons slot="end">
+      <ion-icon style="color:rgb(155, 146, 146)" name="menu" (click)="presentActionSheet()" class="btn_menu"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-list>
+  <div   *ngFor="let item of commandes;" >
+    <ion-item button [routerLink]="['/detail-order',item.id]">
+    
+   
+      <ion-label>
+        <p> N° {{item.id}}</p>
+        <ion-note color="primary" >{{item.createdAt | date}}</ion-note>
+
+      </ion-label>
+
+      <ion-note color="primary" >
+        <p>{{ item.total | currency: 'TND'}}</p>
+      </ion-note> 
+    
+  </ion-item>
+</div>
+</ion-list>
+
+</ion-content>

@@ -10,5 +10,6 @@ export interface Commande{
     idProvider?:string,
     total?:number
     type?:string,
-    createdAt?: any;
+    createdAt?: any,
+    etat?:string
 }

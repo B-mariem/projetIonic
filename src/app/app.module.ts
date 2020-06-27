@@ -13,7 +13,8 @@ import { environment } from 'src/environments/environment';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
-import { CartModalPageModule } from './pages/cart/cart-modal/cart-modal.module';
+import { CartModalPageModule } from './pages/Client/cart-modal/cart-modal.module';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,6 +32,7 @@ import { CartModalPageModule } from './pages/cart/cart-modal/cart-modal.module';
   providers: [
     StatusBar,
     SplashScreen,
+    ScreenOrientation,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     Keyboard
   ],

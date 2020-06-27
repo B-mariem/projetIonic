@@ -11,6 +11,7 @@ import { map } from 'rxjs/operators';
 export class CartService {
 private cart = [];
 private cartItemCount=new BehaviorSubject(0) 
+
 private commandeCollection: AngularFirestoreCollection<Commande>
 
   constructor(private router:Router,private afs: AngularFirestore) {
@@ -33,14 +34,39 @@ private commandeCollection: AngularFirestoreCollection<Commande>
       })
     );
   }
-  deleteCommande(id: string) {
-    return this.commandeCollection.doc(id).delete();
-  }
+
   getCommande(id: string) {
     return this.commandeCollection.doc<Commande>(id).valueChanges();
   }
 
+  getCommandeUser(id: string) {  
+    return this.afs.collection("/Commandes",ref=>ref.where("idClient","==",id)).snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+    
+          return { id,...data };
+        });
+      })
+    );
+   }
+   getCommandeProvider(id: string) {  
+    return this.afs.collection("/Commandes",ref=>ref.where("idProvider","==",id)).snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+    
+          return { id, ...data };
+        });
+      })
+    );
+   }
 
+updateEtat(id:string){
+  return this.commandeCollection.doc<Commande>(id).update({ etat:"confirmed" });
+}
 
 
 

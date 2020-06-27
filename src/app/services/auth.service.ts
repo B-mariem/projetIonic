@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from '../interfaces/user';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +14,7 @@ export class AuthService {
     this.userCollection = this.db.collection<User>('Users');
 
    }
-   /*getUser(userId: string) {
-    return this.userCollection.doc<User>(userId).valueChanges()
-    }*/
+
     login(email:string, password:string){
 
       return new Promise((resolve, rejected) =>{
@@ -48,4 +47,23 @@ export class AuthService {
   getAuth() {
     return this.afa.auth;
   }
+
+  getUserInformation(email:string){  
+    return this.db.collection("/Users",ref=>ref.where("email","==",email)).snapshotChanges().pipe(
+      map(users => {
+        return users.map(user => {
+          const data = user.payload.doc.data();
+          const id = user.payload.doc.id;
+    
+          return { id, ...data };
+        });
+      })
+    );
+   
+}
+
+updateUser(email: string, user: User) {
+  return this.userCollection.doc<User>(email).update(user);
+}
+
 }

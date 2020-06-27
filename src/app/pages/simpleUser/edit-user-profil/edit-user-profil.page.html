@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Edit User Profil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item class="ion-margin-top">
+    <ion-label position="floating">userName</ion-label>
+    <ion-input type="name"  [(ngModel)]="user.userName"></ion-input>
+  </ion-item>
+  <ion-item class="ion-margin-top" >
+    <ion-label position="floating">Adress</ion-label>
+    <ion-input type="text" [(ngModel)]="user.adresse"></ion-input>
+  </ion-item>
+
+  <ion-item class="ion-margin-top">
+    <ion-label position="floating">phone Number</ion-label>
+    <ion-input type="number" [(ngModel)]="user.tel"></ion-input>
+  </ion-item>
+<br>
+<ion-button  color="primary" (click)="updateUser()">Update</ion-button>
+</ion-content>

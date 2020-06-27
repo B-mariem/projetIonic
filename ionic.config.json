@@ -1,7 +1,8 @@
 {
-  "name": "SurfShopNovamente",
+  "name": "Covid-shop",
   "integrations": {
-    "cordova": {}
+    "cordova": {},
+    "capacitor": {}
   },
   "type": "angular"
 }

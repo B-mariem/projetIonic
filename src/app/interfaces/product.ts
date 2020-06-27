@@ -4,10 +4,10 @@ export interface Product {
     description?: string;
     picture?: string;
     price?: number;
-    createdAt?: Date;
+    createdAt?: number;
     userId?: string;
     adresse?:string,
-    tel?:string,
+    tel?:number,
     amount?:number,
     totalamount?:number
 }
