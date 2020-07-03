@@ -15,7 +15,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { CartModalPageModule } from './pages/Client/cart-modal/cart-modal.module';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
-
+import { AngularFireStorageModule } from "@angular/fire/storage";
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -26,6 +26,7 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    AngularFireStorageModule,
     CartModalPageModule
   ],
 

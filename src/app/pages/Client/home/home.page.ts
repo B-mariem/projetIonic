@@ -8,6 +8,7 @@ import { User } from 'src/app/interfaces/user';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { CartModalPage } from '../cart-modal/cart-modal.page';
 import { Router } from '@angular/router';
+import { CategorieService } from 'src/app/services/categorie.service';
 
 @Component({
   selector: 'app-home',
@@ -24,8 +25,10 @@ export class HomePage implements OnInit {
   cartItemCount: BehaviorSubject<number>;
   userId:string
   email:string
-  productsFiltre=[]
+ 
+
   @ViewChild('cart', { read: ElementRef})fab: ElementRef;
+  categories: any;
 
   constructor(
     private authService: AuthService,
@@ -34,20 +37,28 @@ export class HomePage implements OnInit {
     private toastCtrl: ToastController,
     public actionSheetController: ActionSheetController,
     private cartService: CartService, 
-    private router:Router) {}
+    private router:Router,private categorieService:CategorieService) {
+      this.categorieService.getCategies().subscribe(data=>{
+        this.categories=data
+      })}
 
-    loadProducts(){
+    loadProducts():Product[]{
         let allproducts;
+      
         this.productsSubscription = this.productService.getProducts().subscribe(data => {
         allproducts=data
           for (var val in allproducts){
             if(allproducts[val].userId!==this.userId){
                   this.products.push(allproducts[val])
                 }
+                
           }
+          
       });
+      
+      
+      return this.products
     }
-
  async addToCart(product) {
     let object={
       id:product.id,
@@ -78,29 +89,10 @@ export class HomePage implements OnInit {
     }else{
       alert("this product is not available ")
     }
-    
-   
-
-   this.animateCSS('tada');
   }
  
  async openCart() {
-    this.animateCSS('bounceOutLeft', true);
     this.router.navigate(["cart-modal"])
-  }
- 
-  animateCSS(animationName, keepAnimated = false) {
-    const node = this.fab.nativeElement;
-    node.classList.add('animated', animationName)
-    
-    //https://github.com/daneden/animate.css
-    function handleAnimationEnd() {
-      if (!keepAnimated) {
-        node.classList.remove('animated', animationName);
-      }
-      node.removeEventListener('animationend', handleAnimationEnd)
-    }
-    node.addEventListener('animationend', handleAnimationEnd)
   }
 
 
@@ -121,7 +113,7 @@ export class HomePage implements OnInit {
       return;
     }
   this.products = this.products.filter(currentGoal => {
-      if (currentGoal.name && searchTerm) {
+      if (currentGoal.categorie && searchTerm) {
       if (currentGoal.name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {
         return true;
         }
@@ -133,10 +125,7 @@ export class HomePage implements OnInit {
   goToMyProducts(){
     this.router.navigate(["myproducts",this.userId])  }
   
-  ngOnDestroy() {
-    this.productsSubscription.unsubscribe();
-
-  }
+  
 
   async logout() {
     await this.presentLoading();

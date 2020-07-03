@@ -16,9 +16,16 @@
     <ion-item>
       <ion-textarea rows="4" [(ngModel)]="product.description" placeholder="Description"></ion-textarea>
     </ion-item>
-    <ion-item>
-      <ion-input type="text" [(ngModel)]="product.picture" placeholder="Picture"></ion-input>
+    <ion-item lines="none">
+      <input type="file" [(ngModel)]="product.picture" (change)="chooseFile($event)" required>
     </ion-item>
+  <ion-item>
+    <ion-select  [(ngModel)]="product.categorie" >
+      <ion-select-option *ngFor="let item of categories" [value]="item.libelle">
+        {{item.libelle}}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
     <ion-item>
       <ion-input type="number" [(ngModel)]="product.price" placeholder="Price"></ion-input>
     </ion-item>

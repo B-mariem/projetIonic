@@ -3,7 +3,6 @@ import { CartService } from 'src/app/services/cart/cart.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { ActionSheetController, LoadingController } from '@ionic/angular';
-import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
 @Component({
   selector: 'app-order-provider',
@@ -19,10 +18,7 @@ export class OrderProviderPage implements OnInit {
     private authService: AuthService,
      public actionSheetController: ActionSheetController,
      private router:Router,
-     private loadingCtrl: LoadingController,private screenOrientation: ScreenOrientation) {    
-      this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
-
-
+     private loadingCtrl: LoadingController) {    
        this.userId = this.activatedRoute.snapshot.params['id']; 
        this.loadOrdersProvider(this.userId) 
     }
@@ -32,10 +28,10 @@ export class OrderProviderPage implements OnInit {
   }
   back(){
     this.router.navigate(["myproducts",this.authService.getAuth().currentUser.uid])
-    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+  
 
   }
-  async loadOrdersProvider(id:string){
+  loadOrdersProvider(id:string){
     this.cartService.getCommandeProvider(id).subscribe(data=>{
       this.commandes=data   
       console.log(this.commandes);

@@ -15,9 +15,9 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./cart-modal.page.scss'],
 })
 export class CartModalPage implements OnInit {
-  cart: Product[] = [];
-  commande:Commande={}
- userId:string
+  public cart: Product[] = [];
+  public commande:Commande={}
+  public userId:string
 
   constructor(private cartService: CartService,
      private alertCtrl: AlertController,
@@ -93,7 +93,7 @@ export class CartModalPage implements OnInit {
             }
 
             console.log('Confirm Okay');
-            this.router.navigate(["/list-order",this.userId,"client"])
+            this.router.navigate(["/list-order",this.userId])
           }
         }
       ]

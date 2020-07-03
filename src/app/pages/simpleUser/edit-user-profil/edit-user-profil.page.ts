@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
 })
 export class EditUserProfilPage implements OnInit {
   private userEmail:string;
-  private user:User={};
+  private user:any;
   private loading: any;
   private userSubscription: Subscription;
 

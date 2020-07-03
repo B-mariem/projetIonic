@@ -15,7 +15,7 @@
   <div   *ngFor="let item of commandes;" >
     <ion-item button [routerLink]="['/detail-order-provider',item.id]">
     
-   <ion-col size="6">
+   <ion-col size="4">
       <ion-label>
         <p> N° {{item.id}}</p>
         <ion-note color="primary" >{{item.createdAt | date}}     

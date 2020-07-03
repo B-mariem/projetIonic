@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastController } from '@ionic/angular';
-import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 @Component({
   selector: 'app-detail-order-provider',
   templateUrl: './detail-order-provider.page.html',
@@ -13,18 +12,11 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 export class DetailOrderProviderPage implements OnInit {
   private idCommande :string;
   private commande:Commande={}
-  
-  
-  
-    constructor(  private activatedRoute: ActivatedRoute,
-      private cartService : CartService, 
-      private router:Router,
-      private authService:AuthService,    
-      private toastCtrl: ToastController,
-      private screenOrientation: ScreenOrientation) { 
-
-        this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
-
+   constructor(  private activatedRoute: ActivatedRoute,
+                 private cartService : CartService, 
+                 private router:Router,
+                 private authService:AuthService,    
+                 private toastCtrl: ToastController) { 
         this.idCommande=this.activatedRoute.snapshot.params['id'];
         this.loadCommande()
       }
@@ -42,12 +34,11 @@ export class DetailOrderProviderPage implements OnInit {
   }
  async back(){
   this.router.navigate(["order-provider",this.authService.getAuth().currentUser.uid])
-  this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE_PRIMARY);
-
+  
   }
 
   async ConfirmOrder(){
- this.cartService.updateEtat(this.idCommande).then(()=>{
+ this.cartService.updateEtat(this.idCommande,"Confirmed").then(()=>{
   this.presentToast("the order is confirmed")
       this.back()
     })

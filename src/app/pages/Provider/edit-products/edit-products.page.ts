@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NavController, LoadingController, ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/interfaces/user';
+import { CategorieService } from 'src/app/services/categorie.service';
 
 
 @Component({
@@ -20,6 +21,7 @@ export class EditProductsPage implements OnInit {
   private loading: any;
   private productSubscription: Subscription;
   private user:User={};
+  categories: { id: string; libelle?: string; }[];
   constructor(
     private productService: ProductService,
     private activatedRoute: ActivatedRoute,
@@ -27,42 +29,45 @@ export class EditProductsPage implements OnInit {
     private authService: AuthService,
     private toastCtrl: ToastController,
     private router:Router,
-  ) {
+    private categorieService:CategorieService) {
+     
     this.productId = this.activatedRoute.snapshot.params['id'];
-
-    if (this.productId) this.loadProduct();
-    this.loadUser()
+this.loadUser()
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+  this.loadProduct()
+  this.loadCategories();
+  //this.loadUser()
+   }
+loadCategories(){
+  this.categorieService.getCategies().subscribe(data=>{
+    this.categories=data
+  })
+}
 
-  ngOnDestroy() {
-    if (this.productSubscription) this.productSubscription.unsubscribe();
-  }
-
-  loadProduct() {
-    this.productSubscription = this.productService.getProduct(this.productId).subscribe(data => {
+loadProduct() {
+    this.productService.getProduct(this.productId).subscribe(data => {
       this.product = data;
     });
   }
-  loadUser() {
+
+loadUser() {
  this.authService.getUserInformation(this.authService.getAuth().currentUser.email)
     .subscribe(data => {
-      this.user = data[0];
-      console.log(this.user);
-      
+      this.user = data[0];      
     });
   }
-  async saveProduct() {
+  
+async saveProduct() {
     await this.presentLoading();
-
     this.product.userId = this.authService.getAuth().currentUser.uid;
     this.product.adresse=this.user.adresse
     this.product.tel=this.user.tel
       try {
         await this.productService.updateProduct(this.productId, this.product);
         await this.loading.dismiss();
-        this.router.navigate(["myproducts"])
+        this.router.navigate(["myproducts",this.authService.getAuth().currentUser.uid])
 
       } catch (error) {
         this.presentToast('error');

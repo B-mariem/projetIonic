@@ -1,17 +1,16 @@
 <ion-header>
   <ion-toolbar color="primary">
-
-     <ion-buttons slot="end" fill="clear">
-      <ion-button (click)="openCart()" #cart class="btn_cart">
-      <div class="cart-length">{{ cartItemCount | async }}</div>
-      <ion-icon name="cart" class="cart-icon"></ion-icon>
-      </ion-button>
-       <ion-icon style="color:rgb(155, 146, 146)" name="menu" (click)="presentActionSheet()" class="btn_menu"></ion-icon>
+    <ion-buttons slot="end" fill="clear">
+         <ion-button (click)="openCart()" #cart class="btn_cart">
+            <div class="cart-length">{{ cartItemCount | async }}</div>
+            <ion-icon name="cart" class="cart-icon"></ion-icon>
+          </ion-button>
+         <ion-icon style="color:rgb(155, 146, 146)" name="menu" (click)="presentActionSheet()" class="btn_menu"></ion-icon>
      </ion-buttons>
 
-     <ion-title>
+    <ion-title>
        Covid-19
-     </ion-title>
+    </ion-title>
    </ion-toolbar>
  </ion-header>
  
@@ -19,10 +18,9 @@
 
    <br>
 
-   <ion-searchbar   
-
-   (ionInput)="filterList($event)"></ion-searchbar>
-
+   <ion-searchbar (ionInput)="filterList($event)"></ion-searchbar>
+ 
+  
   <ion-list>
     <ion-label>All Products</ion-label>
     <ion-item-sliding *ngFor="let product of products">
@@ -33,8 +31,8 @@
         <ion-label [routerLink]="['/details', product.id]">
           {{ product.name }}
           <p>{{ product.description }}</p>
-      <ion-text  color="success"  style="float: right; font-size: x-small;" *ngIf="product.totalamount > 0" >In Stock </ion-text>
-      <ion-text  color="danger"  style="float: right; font-size: x-small;" *ngIf="product.totalamount == 0" >not available </ion-text>
+    <ion-text  color="success"  class="ion-float-right" *ngIf="product.totalamount > 0" >In Stock </ion-text>
+      <ion-text  color="danger" class="ion-float-right"  style="float: right; font-size: x-small;" *ngIf="product.totalamount == 0" >not available </ion-text>
  
       <p style="color: black;">{{product.adresse}}</p>
          
@@ -52,10 +50,8 @@
       </ion-item>
 
      
-    </ion-item-sliding>
-    
-    
-  </ion-list>
+    </ion-item-sliding> 
+</ion-list>
 </ion-content>
 <ion-footer>
   <ion-toolbar>

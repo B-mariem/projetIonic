@@ -38,13 +38,12 @@ ngOnInit() {
  this.loadProduct()
 
 }
-async loadProduct(){
- 
-  this.productService.getProductUser(this.userId).subscribe(data=>{
+loadProduct(){
+ this.productService.getProductUser(this.userId).subscribe(data=>{
     this.products=data;
     })
 }
-async goToOrders(){
+goToOrders(){
   this.router.navigate(["order-provider",this.userId])
 }
 
@@ -68,10 +67,11 @@ async presentLoading() {
 }
 
 async deleteProduct(id: string) {
+  await this.presentLoading()
   try {
-    await this.productService.deleteProduct(id).then(()=>{
-      this.router.navigate(["/myproducts"])
-    })
+    await this.productService.deleteProduct(id)
+    this.loading.dismiss();
+      this.router.navigate(["/myproducts",this.userId])
   } catch (error) {
     this.presentToast('error');
   }

@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button routerLink="/home" ></ion-back-button>
     </ion-buttons>
-    <ion-title>details </ion-title>
+    <ion-title>{{product.name}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -14,18 +14,21 @@
     </ion-avatar> 
     <ion-card-header>  
       <ion-card-title>{{product.name}}  </ion-card-title> 
-      <ion-text  color="success" style="float: right;" *ngIf="product.totalamount > 0" >In Stock </ion-text>
-      <ion-text  color="danger"  style="float: right;" *ngIf="product.totalamount == 0" >not available </ion-text>
+      <ion-text  color="success" class="ion-float-right" *ngIf="product.totalamount > 0" >In Stock </ion-text>
+      <ion-text  color="danger"  class="ion-float-right" *ngIf="product.totalamount == 0" >not available </ion-text>
 
     </ion-card-header>
 
     <ion-card-content>
       
-      <p align="justify">{{product.description}}</p> 
+        <ion-text>
+          {{product.description}}
+        </ion-text><br>
+      
 
-      <ion-text color="dark"><h3>Adresse :{{product.adresse}}</h3></ion-text>
-      <ion-text color="dark"><h3>Phone number : {{product.tel}}</h3></ion-text>
-      <ion-text color="warning" style="float: right;"><h3> {{product.totalamount}} pieces left</h3></ion-text>
+      <ion-text color="dark">Adresse :{{product.adresse}}</ion-text><br>
+      <ion-text color="dark">Phone number : {{product.tel}}</ion-text><br>
+      <ion-text color="warning"  class="ion-float-right"> {{product.totalamount}} pieces left</ion-text>
 
       <br>  
     </ion-card-content>

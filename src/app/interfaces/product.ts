@@ -1,3 +1,4 @@
+import { User } from 'src/app/interfaces/user';
 export interface Product {
     id?: string;
     name?: string;
@@ -9,5 +10,6 @@ export interface Product {
     adresse?:string,
     tel?:number,
     amount?:number,
-    totalamount?:number
+    totalamount?:number,
+    categorie?:string
 }

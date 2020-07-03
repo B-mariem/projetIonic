@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Product } from '../interfaces/product';
 import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { AngularFireStorage } from "@angular/fire/storage";
+
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import { Observable } from 'rxjs';
 export class ProductService {
   private productsCollection: AngularFirestoreCollection<Product>;
 
-  constructor(private afs: AngularFirestore) {
+  constructor(private afs: AngularFirestore, private storage: AngularFireStorage,) {
     this.productsCollection = this.afs.collection<Product>('Products');
   }
 
@@ -27,8 +28,31 @@ export class ProductService {
     );
   }
 
-  addProduct(product: Product) {
+  /*addProduct(product: Product) {
     return this.productsCollection.add(product);
+  }*/
+  addProduct(product: Product,url){
+    this.productsCollection.add(product)
+    .then(async resp => {
+
+      const imageUrl = await this.uploadFile(resp.id, url)
+
+      this.productsCollection.doc(resp.id).update({
+      
+        picture: imageUrl || null
+      })
+    }).catch(error => {
+      console.log(error);
+    })
+  }
+
+  async uploadFile(id, file) {
+    if(file && file.length) {
+    
+        const task = await this.storage.ref('images').child(id).put(file[0])
+        return this.storage.ref(`images/${id}`).getDownloadURL().toPromise();
+      
+    }
   }
 
   getProduct(id: string) {

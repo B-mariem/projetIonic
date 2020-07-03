@@ -3,9 +3,7 @@ import { CartService } from 'src/app/services/cart/cart.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Commande } from 'src/app/interfaces/commande';
 import { AuthService } from 'src/app/services/auth.service';
-import { AlertController } from '@ionic/angular';
-import { ProductService } from 'src/app/services/product.service';
-import { Product } from 'src/app/interfaces/product';
+import { ToastController, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-detail-order',
@@ -15,38 +13,52 @@ import { Product } from 'src/app/interfaces/product';
 export class DetailOrderPage implements OnInit {
 private idCommande :string;
 private commande:Commande={}
-
-
+private loading:any
 
   constructor(  private activatedRoute: ActivatedRoute,
-    private cartService : CartService, 
-    private router:Router,
-    private authService:AuthService) { 
+                private cartService : CartService, 
+                private router:Router,
+                private authService:AuthService,
+                private toastCtrl: ToastController,
+                private loadingCtrl: LoadingController,) { 
       this.idCommande=this.activatedRoute.snapshot.params['id'];
       this.loadCommande()
-     
-      
-
-      
-      
-  
     }
 
   ngOnInit() {
     
   }
+  
+async DoneOrder(){
+  await this.presentLoading();
+  try {
+    this.cartService.updateEtat(this.idCommande,"Done")
+    await this.loading.dismiss();
+    this.back()
+  } catch (error) {
+    this.presentToast('Error when trying to save');
+    this.loading.dismiss();
+  }
+}
+
+async presentLoading() {
+  this.loading = await this.loadingCtrl.create({ message: 'wait...' });
+  return this.loading.present();
+  } 
+async presentToast(message: string) {
+  const toast = await this.toastCtrl.create({ message, duration: 1000 });
+  toast.present();
+  }
 
 loadCommande(){
-this.cartService.getCommande(this.idCommande).subscribe(data=>{
+  this.cartService.getCommande(this.idCommande).subscribe(data=>{
   this.commande=data
-  console.log(this.commande);
-  
-})
-}
-back(){
-this.router.navigate(["list-order",this.authService.getAuth().currentUser.uid])
-}
+  console.log(this.commande);})
+ }
 
+back(){
+  this.router.navigate(["list-order",this.authService.getAuth().currentUser.uid])
+  }
 }
 /*async deleteCommande(id: string) {
    let alert = await this.alertCtrl.create({

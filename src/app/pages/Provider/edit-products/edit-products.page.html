@@ -14,10 +14,14 @@
       <ion-input type="text" [(ngModel)]="product.name" ></ion-input>
     </ion-item>
     <ion-item>
-      <ion-textarea rows="4" [(ngModel)]="product.description" ></ion-textarea>
+      <ion-textarea rows="10" [(ngModel)]="product.description" ></ion-textarea>
     </ion-item>
     <ion-item>
-      <ion-input type="text" [(ngModel)]="product.picture"></ion-input>
+      <ion-select  [(ngModel)]="product.categorie">
+        <ion-select-option *ngFor="let item of categories" [value]="item.libelle">
+          {{item.libelle}}
+        </ion-select-option>
+      </ion-select>
     </ion-item>
     <ion-item>
       <ion-input type="text" [(ngModel)]="product.price"></ion-input>

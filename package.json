@@ -1,5 +1,5 @@
 {
-  "name": "SurfShopNovamente",
+  "name": "Covid-shop",
   "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
@@ -23,6 +23,7 @@
     "@angular/router": "^7.2.2",
     "@capacitor/android": "^2.1.0",
     "@capacitor/core": "2.1.0",
+    "@firebase/storage": "^0.3.37",
     "@ionic-native/core": "^5.0.0",
     "@ionic-native/keyboard": "^5.3.0",
     "@ionic-native/screen-orientation": "^5.26.0",

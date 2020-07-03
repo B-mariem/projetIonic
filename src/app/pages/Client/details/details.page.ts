@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/interfaces/product';
-import { NavController, LoadingController, ToastController } from '@ionic/angular';
-import { AuthService } from 'src/app/services/auth.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -14,14 +12,10 @@ import { Subscription } from 'rxjs';
 export class DetailsPage implements OnInit {
   private productId: string = null;
   public product: Product = {};
-  private loading: any;
-  private productSubscription: Subscription;
 
   constructor(
     private productService: ProductService,
-    private activatedRoute: ActivatedRoute,
-  
-  ) {
+    private activatedRoute: ActivatedRoute) {
     this.productId = this.activatedRoute.snapshot.params['id'];
 
     if (this.productId) this.loadProduct();
@@ -29,9 +23,6 @@ export class DetailsPage implements OnInit {
 
   ngOnInit() { }
 
-  ngOnDestroy() {
-    if (this.productSubscription) this.productSubscription.unsubscribe();
-  }
 
   loadProduct() {
     this.productSubscription = this.productService.getProduct(this.productId).subscribe(data => {

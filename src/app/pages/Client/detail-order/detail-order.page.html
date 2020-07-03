@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button (click)="back()" ></ion-back-button>
+       <ion-back-button (click)="back()" ></ion-back-button>
     </ion-buttons>
     <ion-title>Order Details </ion-title>
   </ion-toolbar>
@@ -9,31 +9,50 @@
 
 <ion-content>
   <ion-item>
- <ion-list>
-  <ion-text color="dark"><p>{{commande.cart.length}} products</p></ion-text>
-  <ion-text color="primary"><p>{{ commande.total  | currency: 'TND'}}</p></ion-text>
-</ion-list>
-  <ion-text color="dark" style="float: inline-end;margin-left: 100px;">
-    <p>{{commande.type}}</p>
-    <p>Etat : {{commande.etat}}</p>
-    
-  </ion-text>
+       <ion-list slot="start">
+           <ion-item lines="none">
+              <ion-text color="dark">{{commande.cart.length}} products</ion-text>
+           </ion-item>
 
-</ion-item>
+           <ion-item lines="none">
+                <ion-text color="primary">{{ commande.total  | currency: 'TND'}}</ion-text>
+           </ion-item>
+       </ion-list>
 
-<ion-label class="item">Items</ion-label>
-<ion-card *ngFor="let item of commande.cart">
-  <ion-item>
-  <ion-avatar slot="start" >
-    <img [src]="item.picture">
-  </ion-avatar> 
-  <ion-note slot="start" color="dark">
-   <h4>{{item.name }}</h4> 
-   <p>Qte : {{item.amount }}</p> 
-    
-  </ion-note>
-</ion-item>
+      <ion-list slot="end">
+           <ion-item lines="none">
+               <ion-text color="dark">Mode : {{commande.type}}</ion-text>
+           </ion-item>
+
+           <ion-item lines="none">
+               <ion-text color="dark">Etat : {{commande.etat}} </ion-text>
+            </ion-item>
+      </ion-list>
+    </ion-item>
+
+
+
+
+
+  <ion-list>    
+    <ion-label class="ion-padding">Items</ion-label>
+    <ion-card *ngFor="let item of commande.cart">
+         <ion-item>
+            <ion-avatar slot="start" >
+                 <img [src]="item.picture">
+            </ion-avatar> 
+           <ion-list slot="start">
+                <ion-text color="dark">{{item.name }}</ion-text><br>
+                <ion-text color="dark">Qte : {{item.amount }}</ion-text> 
+
+           </ion-list>
+           
+        </ion-item>
   </ion-card>
+</ion-list>
 
+  <ion-button expand="full" *ngIf="commande.etat=='Confirmed'" (click)="DoneOrder()" >
+    Done
+  </ion-button>
  
 </ion-content>

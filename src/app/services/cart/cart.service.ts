@@ -64,8 +64,8 @@ private commandeCollection: AngularFirestoreCollection<Commande>
     );
    }
 
-updateEtat(id:string){
-  return this.commandeCollection.doc<Commande>(id).update({ etat:"confirmed" });
+updateEtat(id:string,etat:string){
+  return this.commandeCollection.doc<Commande>(id).update({ etat:etat });
 }
 
 

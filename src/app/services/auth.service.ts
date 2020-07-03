@@ -49,17 +49,7 @@ export class AuthService {
   }
 
   getUserInformation(email:string){  
-    return this.db.collection("/Users",ref=>ref.where("email","==",email)).snapshotChanges().pipe(
-      map(users => {
-        return users.map(user => {
-          const data = user.payload.doc.data();
-          const id = user.payload.doc.id;
-    
-          return { id, ...data };
-        });
-      })
-    );
-   
+    return this.db.collection("/Users",ref=>ref.where("email","==",email)).valueChanges()
 }
 
 updateUser(email: string, user: User) {
